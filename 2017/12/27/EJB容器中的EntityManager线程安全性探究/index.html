@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="ejb,jpa,">
 
 
 
@@ -85,13 +85,14 @@
 
 
 <meta name="description" content="问题始于一次组件功能的封装, 对实体的基础操作都停留在DAO层面(基础的模型为DAO-Business-Controller). 是否能提供一种通用行的DAO来为Business提供常用的操作. 这就需要考虑DAO在多线程环境下的使用情况了, 由于DAO中实际操作实体的对象为EntityManager所以也就转为对EntityManager的并发情况下的探究.">
+<meta name="keywords" content="ejb,jpa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EJB容器中的EntityManager线程安全性探究">
 <meta property="og:url" content="http://github.com/wuxii/2017/12/27/EJB容器中的EntityManager线程安全性探究/index.html">
 <meta property="og:site_name" content="wuxii">
 <meta property="og:description" content="问题始于一次组件功能的封装, 对实体的基础操作都停留在DAO层面(基础的模型为DAO-Business-Controller). 是否能提供一种通用行的DAO来为Business提供常用的操作. 这就需要考虑DAO在多线程环境下的使用情况了, 由于DAO中实际操作实体的对象为EntityManager所以也就转为对EntityManager的并发情况下的探究.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T10:01:36.986Z">
+<meta property="og:updated_time" content="2017-12-27T10:01:36.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EJB容器中的EntityManager线程安全性探究">
 <meta name="twitter:description" content="问题始于一次组件功能的封装, 对实体的基础操作都停留在DAO层面(基础的模型为DAO-Business-Controller). 是否能提供一种通用行的DAO来为Business提供常用的操作. 这就需要考虑DAO在多线程环境下的使用情况了, 由于DAO中实际操作实体的对象为EntityManager所以也就转为对EntityManager的并发情况下的探究.">
@@ -311,6 +312,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jpa/" itemprop="url" rel="index">
+                    <span itemprop="name">jpa</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jpa/ejb/" itemprop="url" rel="index">
+                    <span itemprop="name">ejb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -378,6 +412,14 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ejb/" rel="tag"># ejb</a>
+          
+            <a href="/tags/jpa/" rel="tag"># jpa</a>
+          
+        </div>
       
 
       
@@ -476,7 +518,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
