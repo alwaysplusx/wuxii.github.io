@@ -1,0 +1,883 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="远程访问是EJB作为分布式应用的主要特性(基于RMI), 通过远程访问在客户端不必耗费大量的硬件资源就可以享受服务器级别的服务(EJB服务部署在服务器上).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EJB客户端远程调用汇总">
+<meta property="og:url" content="http://github.com/wuxii/2017/01/10/EJB客户端远程调用汇总/index.html">
+<meta property="og:site_name" content="wuxii">
+<meta property="og:description" content="远程访问是EJB作为分布式应用的主要特性(基于RMI), 通过远程访问在客户端不必耗费大量的硬件资源就可以享受服务器级别的服务(EJB服务部署在服务器上).">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-01-12T12:31:56.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EJB客户端远程调用汇总">
+<meta name="twitter:description" content="远程访问是EJB作为分布式应用的主要特性(基于RMI), 通过远程访问在客户端不必耗费大量的硬件资源就可以享受服务器级别的服务(EJB服务部署在服务器上).">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/wuxii/2017/01/10/EJB客户端远程调用汇总/">
+
+
+
+
+
+  <title> EJB客户端远程调用汇总 | wuxii </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wuxii</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://github.com/wuxii/2017/01/10/EJB客户端远程调用汇总/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="wuxin">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wuxii">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wuxii" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                EJB客户端远程调用汇总
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T22:01:59+08:00">
+                2017-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/10/EJB客户端远程调用汇总/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/EJB客户端远程调用汇总/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>远程访问是EJB作为分布式应用的主要特性(基于RMI), 通过远程访问在客户端不必耗费大量的硬件资源就可以享受服务器级别的服务(EJB服务部署在服务器上).<br><a id="more"></a></p>
+<h2 id="客户端运行环境"><a href="#客户端运行环境" class="headerlink" title="客户端运行环境"></a>客户端运行环境</h2><p>在客户端中需要有服务端对应的API(Remote接口)以及服务端运行环境的最小集. 各个厂商的服务端实现不尽相同所以厂商们都需要提供客户端允许的服务最小集合.</p>
+<h3 id="Weblogic"><a href="#Weblogic" class="headerlink" title="Weblogic"></a>Weblogic</h3><p>Weblogic默认不提供客户端运行环境, 只能通过特定的方式生成客户端运行环境所需要的运行环境(JAR). 其步骤如下:</p>
+<ol>
+<li>启动命令行,切换到<code>{weblogic_home}/wlserver_[version]/server/lib</code>下</li>
+<li>输入命令<code>java -jar wljarbuilder.jar</code></li>
+<li>在当前目录下将生成<code>wlfullclient.jar</code>(50+M)即为客户端的最小运行环境</li>
+</ol>
+<blockquote>
+<p>使用同样的方式可以生成对应的Webloigic Maven工具<code>java -jar wljarbuilder.jar -profile weblogic-maven-plugin</code></p>
+</blockquote>
+<h2 id="远程lookup方式"><a href="#远程lookup方式" class="headerlink" title="远程lookup方式"></a>远程lookup方式</h2><p>通过客户端运行环境就可以创建JNDI Context, 通过JNDI名称使用lookup的方式来获取服务端的ejb session bean进行远程调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line"><span class="comment">// naming context 初始化工程</span></span><br><span class="line">props.setProperty(javax.naming.Context.INITIAL_CONTEXT_FACTORY, <span class="string">""</span>);</span><br><span class="line"><span class="comment">// 远程开放的地址</span></span><br><span class="line">props.setProperty(javax.naming.Context.PROVIDER_URL, <span class="string">""</span>);</span><br><span class="line">... <span class="comment">// other properties</span></span><br><span class="line">javax.naming.Context context = <span class="keyword">new</span> InitContext(props);</span><br><span class="line">XXRemote remoteService = (XXRemote) context.lookup(jndi);</span><br></pre></td></tr></table></figure>
+<h2 id="各服务器JNDI格式对照"><a href="#各服务器JNDI格式对照" class="headerlink" title="各服务器JNDI格式对照"></a>各服务器JNDI格式对照</h2><p>JNDI一般格式:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JNDI = bean-name + 分隔符 + 接口全限定名</span><br><span class="line"># 或</span><br><span class="line">JNDI = app-name + bean-name + 分隔符 + 接口全限定名</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>bean-name默认为类的SimpleName, 可通过注解来指定特定的名称.<br>app-name默认为部署的应用名称</p>
+</blockquote>
+<p>以下说明将基于下面的类做详细说明:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Remote</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">company</span>.<span class="title">FooRemote</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Local</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">com</span>.<span class="title">company</span>.<span class="title">FooLocal</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Stateless</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">company</span>.<span class="title">FooBean</span> <span class="keyword">implements</span> <span class="title">FooRemote</span>, <span class="title">FooLocal</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Weblogic-JNDI"><a href="#Weblogic-JNDI" class="headerlink" title="Weblogic JNDI"></a>Weblogic JNDI</h3><p>FooBean对应的JNDI有:</p>
+<ul>
+<li><code>java:global/{app-name}/FooBean!com.company.FooRemote</code></li>
+<li><code>java:global/{app-name}/FooBean!com.company.FooLocal</code></li>
+</ul>
+<p>可以使用<code>@Stateless#mappedName</code>属性来指定服务器上的bean-name<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Stateless</span>(mappedName = <span class="string">"FooBean"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">company</span>.<span class="title">FooBean</span> <span class="keyword">implements</span> <span class="title">FooRemote</span>, <span class="title">FooLocal</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>指定后weblogic上将生成全局的远程JNDI, 原名称保持不变(即使mappedName与类名不同)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FooBean#com.company.FooRemote</span><br></pre></td></tr></table></figure></p>
+<h3 id="Glassfish-JNDI"><a href="#Glassfish-JNDI" class="headerlink" title="Glassfish JNDI"></a>Glassfish JNDI</h3><p>FooBean对应的JNDI有:</p>
+<ul>
+<li><code>java:global/{app-name}/FooBean!com.company.FooRemote</code></li>
+<li><code>java:global/{app-name}/FooBean!com.company.FooLocal</code></li>
+<li><code>java:global/{app-name}/FooBean</code>(Remote Only/FooBean仅有Remote接口时)</li>
+</ul>
+<p>以及(non-portable/不可移植)的JNDI:</p>
+<ul>
+<li><code>com.company.FooRemote</code></li>
+<li><code>com.company.FooRemote#com.company.FooRemote</code></li>
+</ul>
+<p>使用@Stateless注解指定mappedName为FooBean后</p>
+<ul>
+<li><code>FooBean#com.company.FooRemote</code></li>
+<li><code>FooBean</code></li>
+</ul>
+<blockquote>
+<p><strong>由添加mappedName得出的JNDI存在FooBean可以看出在glassfish中不允许有相同的mappedName</strong><br>存在相同的mappedName则在服务器启动时候得到异常: javax.naming.NameAlreadyBoundException<br>org.omg.CosNaming.NamingContextPackage.AlreadyBound: IDL:omg.org/CosNaming/NamingContext/AlreadyBound:1.0</p>
+</blockquote>
+<h3 id="Wildfly-JNDI"><a href="#Wildfly-JNDI" class="headerlink" title="Wildfly JNDI"></a>Wildfly JNDI</h3><p>FooBean对应的JNDI有:</p>
+<ul>
+<li><code>java:global/{app-name}/FooBean!com.company.FooRemote</code></li>
+<li><code>java:app/{app-name}/FooBean!com.company.FooRemote</code></li>
+<li><code>java:module/FooBean!com.company.FooRemote</code></li>
+<li><code>java:jboss/exported/{app-name}/FooBean!com.company.FooRemote</code></li>
+<li><code>java:global/{app-name}/FooBean!com.company.FooLocal</code></li>
+<li><code>java:app/{app-name}/FooBean!com.company.FooLocal</code></li>
+<li><code>java:module/FooBean!com.company.FooLocal</code></li>
+<li><code>java:global/{app-name}/FooBean</code>(Remote Only)</li>
+<li><code>java:app/{app-name}/FooBean</code>(Remote Only)</li>
+<li><code>java:module/FooBean</code>(Remote Only)</li>
+</ul>
+<blockquote>
+<p>配置@Stateless#mappedName无指定的JNDI</p>
+</blockquote>
+<h3 id="OpenEJB-TomEE-JNDI"><a href="#OpenEJB-TomEE-JNDI" class="headerlink" title="OpenEJB/TomEE JNDI"></a>OpenEJB/TomEE JNDI</h3><p>FooBean对应的JNDI有:</p>
+<ul>
+<li><code>java:global/{app-name}/FooBean!com.company.FooRemote</code></li>
+<li><code>java:global/{app-name}/FooBean!com.company.FooLocal</code></li>
+<li><code>java:global/{app-name}/FooBean</code></li>
+</ul>
+<blockquote>
+<p>配置@Stateless#mappedName无指定的JNDI</p>
+<p>与glassfish相同, 不允许存在相同的mappedName<br>存在则启动时异常:javax.naming.NameAlreadyBoundException:<br>org.apache.openejb.OpenEJBRuntimeException: Unable to bind business remote deployment in jndi.</p>
+</blockquote>
+<h3 id="服务器JNDI对照关系"><a href="#服务器JNDI对照关系" class="headerlink" title="服务器JNDI对照关系"></a>服务器JNDI对照关系</h3><h4 id="格式对照表"><a href="#格式对照表" class="headerlink" title="格式对照表"></a>格式对照表</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">服务器类型</th>
+<th style="text-align:left">默认JNDI格式</th>
+<th style="text-align:left">With mappedName</th>
+<th style="text-align:left">bean-name?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Weblogic</td>
+<td style="text-align:left">java:global/{app-name}/{bean-name}!{interface-name}</td>
+<td style="text-align:left">bean-name#{interface-name}</td>
+<td style="text-align:left">不同interface可相同</td>
+</tr>
+<tr>
+<td style="text-align:left">Glassfish</td>
+<td style="text-align:left">java:global/{app-name}/{bean-name}!{interface-name}</td>
+<td style="text-align:left">bean-name#{interface-name} &amp; bean-name</td>
+<td style="text-align:left">唯一不允许重复</td>
+</tr>
+<tr>
+<td style="text-align:left">Wildfly</td>
+<td style="text-align:left">java:global/{app-name}/{bean-name}!{interface-name}</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">OpenEJB/TomEE</td>
+<td style="text-align:left">java:global/{app-name}/{bean-name}!{interface-name}</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">唯一不允许重复</td>
+</tr>
+</tbody>
+</table>
+<h4 id="可远程lookup的JNDI"><a href="#可远程lookup的JNDI" class="headerlink" title="可远程lookup的JNDI"></a>可远程lookup的JNDI</h4><p>格式说明:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">default            = java:global/&#123;app-name&#125;/&#123;bean-name&#125;!&#123;interface-name&#125;</span><br><span class="line">With mappedName    = &#123;bean-name&#125;#&#123;interface-name&#125;</span><br><span class="line">Single mappedName  = &#123;bean-name&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">服务器类型</th>
+<th style="text-align:center">默认JNDI格式</th>
+<th style="text-align:center">With mappedName</th>
+<th style="text-align:center">Single mappedName</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Weblogic</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:left">Glassfish</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:left">Wildfly</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:left">OpenEJB/TomEE</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Wildfly还支持</p>
+<ul>
+<li>java:jboss/exported/{app-name}/{bean-name}!{interface-name} </li>
+</ul>
+</blockquote>
+<h2 id="各服务器对照表"><a href="#各服务器对照表" class="headerlink" title="各服务器对照表"></a>各服务器对照表</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">服务器类型</th>
+<th style="text-align:left">java.naming.factory.initial</th>
+<th style="text-align:left">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Weblogic</td>
+<td style="text-align:left">weblogic.jndi.WLInitialContextFactory</td>
+<td style="text-align:left">t3://host:7001</td>
+</tr>
+<tr>
+<td style="text-align:left">Websphere</td>
+<td style="text-align:left">com.ibm.websphere.naming.WsnInitialContextFactory</td>
+<td style="text-align:left">iiop://host:2809</td>
+</tr>
+<tr>
+<td style="text-align:left">Wildfly</td>
+<td style="text-align:left">org.wildfly.naming.client.WildFlyInitialContextFactory</td>
+<td style="text-align:left">http-remoting://host:8080</td>
+</tr>
+<tr>
+<td style="text-align:left">Glassfish</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">TomEE/OpenEJB</td>
+<td style="text-align:left">org.apache.openejb.client.RemoteInitialContextFactory</td>
+<td style="text-align:left">ejbd://host:4201</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>实验项目: <a href="https://github.com/wuxii/test/tree/master/test-javaee/test-javaee-clients">https://github.com/wuxii/test/tree/master/test-javaee/test-javaee-clients</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/使用OpenEJB构建嵌入式的EJB环境/" rel="next" title="使用OpenEJB构建嵌入式的EJB环境">
+                <i class="fa fa-chevron-left"></i> 使用OpenEJB构建嵌入式的EJB环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/11/使用Spring-Boot快速开发微服务/" rel="prev" title="使用Spring Boot快速开发微服务">
+                使用Spring Boot快速开发微服务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/10/EJB客户端远程调用汇总/" data-title="EJB客户端远程调用汇总" data-url="http://github.com/wuxii/2017/01/10/EJB客户端远程调用汇总/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="wuxin">
+          <p class="site-author-name" itemprop="name">wuxin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wuxii" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1956186645" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端运行环境"><span class="nav-number">1.</span> <span class="nav-text">客户端运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Weblogic"><span class="nav-number">1.1.</span> <span class="nav-text">Weblogic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程lookup方式"><span class="nav-number">2.</span> <span class="nav-text">远程lookup方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各服务器JNDI格式对照"><span class="nav-number">3.</span> <span class="nav-text">各服务器JNDI格式对照</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Weblogic-JNDI"><span class="nav-number">3.1.</span> <span class="nav-text">Weblogic JNDI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Glassfish-JNDI"><span class="nav-number">3.2.</span> <span class="nav-text">Glassfish JNDI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wildfly-JNDI"><span class="nav-number">3.3.</span> <span class="nav-text">Wildfly JNDI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenEJB-TomEE-JNDI"><span class="nav-number">3.4.</span> <span class="nav-text">OpenEJB/TomEE JNDI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器JNDI对照关系"><span class="nav-number">3.5.</span> <span class="nav-text">服务器JNDI对照关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#格式对照表"><span class="nav-number">3.5.1.</span> <span class="nav-text">格式对照表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可远程lookup的JNDI"><span class="nav-number">3.5.2.</span> <span class="nav-text">可远程lookup的JNDI</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各服务器对照表"><span class="nav-number">4.</span> <span class="nav-text">各服务器对照表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright ">
+  
+  Copyright &copy; 
+  <span itemprop="copyrightYear">2019 wuxin</span>
+
+  
+  <div class="powered-by"></div>
+  <span>Powered by <a href="https://hexo.io">Hexo</a></span>
+  <div class="powered-by"></div>
+  <div class="theme-info">
+    主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+  </div>
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wuxii"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

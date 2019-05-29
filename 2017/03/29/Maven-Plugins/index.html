@@ -1,0 +1,845 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="介绍maven的一些插件基础用法和基础命令.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven Plugins">
+<meta property="og:url" content="http://github.com/wuxii/2017/03/29/Maven-Plugins/index.html">
+<meta property="og:site_name" content="wuxii">
+<meta property="og:description" content="介绍maven的一些插件基础用法和基础命令.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-04-06T13:03:01.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven Plugins">
+<meta name="twitter:description" content="介绍maven的一些插件基础用法和基础命令.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/wuxii/2017/03/29/Maven-Plugins/">
+
+
+
+
+
+  <title> Maven Plugins | wuxii </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wuxii</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://github.com/wuxii/2017/03/29/Maven-Plugins/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="wuxin">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wuxii">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wuxii" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Maven Plugins
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T11:55:59+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/29/Maven-Plugins/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Maven-Plugins/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>介绍maven的一些插件基础用法和基础命令.<br><a id="more"></a></p>
+<h2 id="maven-scm-plugin"><a href="#maven-scm-plugin" class="headerlink" title="maven-scm-plugin"></a>maven-scm-plugin</h2><h3 id="scm配置项"><a href="#scm配置项" class="headerlink" title="scm配置项"></a>scm配置项</h3><ul>
+<li>connectionUri 版本管理的地址</li>
+<li>developerConnectionUrl 开发环境的版本管理地址</li>
+<li>username 版本管理的登录用户名</li>
+<li>password 版本管理的用户密码</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">scm</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>svn://host/repo/trunk/project<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tag</span>&gt;</span>svn://host/repo/tags<span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">     | connection格式: </span></span><br><span class="line"><span class="comment">     |   &lt;service name&gt;:&lt;scm implementation&gt;:&lt;repository url&gt; </span></span><br><span class="line"><span class="comment">     |--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">connection</span>&gt;</span>scm:svn:svn://host/repo/trunk/project<span class="tag">&lt;/<span class="name">connection</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">developerConnection</span>&gt;</span>scm:svn:svn://host/repo/trunk/project<span class="tag">&lt;/<span class="name">developerConnection</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">scm</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-scm-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">           | 通过connectionType切换scm的连接</span></span><br><span class="line"><span class="comment">           |   1. developerConnection</span></span><br><span class="line"><span class="comment">           |   2. connection</span></span><br><span class="line"><span class="comment">           |--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">connectionType</span>&gt;</span>connection<span class="tag">&lt;/<span class="name">connectionType</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">           | 配置用户名密码:</span></span><br><span class="line"><span class="comment">           |  1. 通过pom.xml中配置username &amp; password</span></span><br><span class="line"><span class="comment">           |  2. settings.xml中配置, settings中的id与connection URL对应</span></span><br><span class="line"><span class="comment">           |    &lt;settings&gt;</span></span><br><span class="line"><span class="comment">           |      ...</span></span><br><span class="line"><span class="comment">           |      &lt;servers&gt;</span></span><br><span class="line"><span class="comment">           |        &lt;id&gt;host&lt;/id&gt;</span></span><br><span class="line"><span class="comment">           |        &lt;username&gt;username&lt;/username&gt;</span></span><br><span class="line"><span class="comment">           |        &lt;password&gt;password&lt;/password&gt;</span></span><br><span class="line"><span class="comment">           |      &lt;/servers&gt;</span></span><br><span class="line"><span class="comment">           |      .... </span></span><br><span class="line"><span class="comment">           |    &lt;/settings&gt;</span></span><br><span class="line"><span class="comment">           |--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">username</span>&gt;</span>username<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">password</span>&gt;</span>password<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="scm命令"><a href="#scm命令" class="headerlink" title="scm命令"></a>scm命令</h3><ul>
+<li><p><code>scm:add</code> - command to add file</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn scm:add -Dincludes=path/to</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scm:bootstrap</code> - command to checkout and build a project</p>
+</li>
+<li><p><code>scm:branch</code> - branch the project</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn scm:branch -Dbranch=&quot;&lt;branch name&gt;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scm:changelog</code> - command to show the source code revisions</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn scm:changelog -DstartDate=YYYY-MM-DD -DendDate=YYYY-MM-DD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scm:check-local-modification</code> - fail the build if there is any local modifications</p>
+</li>
+<li><p><code>scm:checkin</code> - command for commiting changes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn scm:checkin -Dmessage=&quot;&lt;commit_log_here&gt;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scm:checkout</code> - command for getting the source code</p>
+</li>
+<li><p><code>scm:diff</code> - command for showing the difference of the working copy with the remote one</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn scm:diff -DstartRevision=&lt;revision&gt; -DendRevision=&lt;revision&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scm:edit</code> - command for starting edit on the working copy</p>
+</li>
+<li><code>scm:export</code> - command to get a fresh exported copy</li>
+<li><code>scm:list</code> - command for get the list of project files</li>
+<li><code>scm:remove</code> - command to mark a set of files for deletion</li>
+<li><code>scm:status</code> - command for showing the scm status of the working copy</li>
+<li><p><code>scm:tag</code> - command for tagging a certain revision</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn scm:tag -Dtag=&quot;&lt;tag name&gt;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>scm:unedit</code> - command to stop editing the working copy</p>
+</li>
+<li><code>scm:update</code> - command for updating the working copy with the latest changes</li>
+<li><code>scm:update-subprojects</code> - command for updating all projects in a multi project build</li>
+<li><code>scm:validate</code> - validate the scm information in the pom<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -DscmConnection=&quot;&lt;scm url&gt;&quot; -DscmDeveloperConnection=&quot;&lt;scm url&gt;&quot; scm:validate</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="maven-release-plugin"><a href="#maven-release-plugin" class="headerlink" title="maven-release-plugin"></a>maven-release-plugin</h2><h3 id="release配置项"><a href="#release配置项" class="headerlink" title="release配置项"></a>release配置项</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">scm</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">developerConnection</span>&gt;</span>scm:svn:svn://host/repo/trunk/project<span class="tag">&lt;/<span class="name">developerConnection</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">scm</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-release-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- mvn执行参数(该执行参数在compile/deploy的时候起作用) --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span>-Dmaven.test.skip=true<span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 设置release是否允许有SNAPSHOT版本的依赖 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">allowTimestampedSnapshots</span>&gt;</span>true<span class="tag">&lt;/<span class="name">allowTimestampedSnapshots</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 设置子模块版本号自动跟随父版本号修改 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">autoVersionSubmodules</span>&gt;</span>true<span class="tag">&lt;/<span class="name">autoVersionSubmodules</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- release时tag名称格式 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tagNameFormat</span>&gt;</span>@&#123;project.artifactId&#125;-@&#123;project.version&#125;<span class="tag">&lt;/<span class="name">tagNameFormat</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 作用类似与svn:ignore --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">checkModificationExcludes</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">checkModificationExclude</span>&gt;</span>**/.classpath<span class="tag">&lt;/<span class="name">checkModificationExclude</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">checkModificationExcludes</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- scm操作时候是否锁定版本库 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">useEditMode</span>&gt;</span>true<span class="tag">&lt;/<span class="name">useEditMode</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 提交前所做的mvn操作 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">preparationGoals</span>&gt;</span>clean verify<span class="tag">&lt;/<span class="name">preparationGoals</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="release命令"><a href="#release命令" class="headerlink" title="release命令"></a>release命令</h3><ul>
+<li><code>release:clean</code> Clean up after a release preparation.</li>
+<li><p><code>release:prepare</code> Prepare for a release in SCM.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># prepare所做的操作:</span><br><span class="line">#   检查是否有未提交的文件</span><br><span class="line">#   检查是否有SNAPSHOT的依赖</span><br><span class="line">#   修改版本号 x.y.x-SNAHSHOT -&gt; x.y.z(可手动指定)</span><br><span class="line">#   修改pom scm信息最终发布的tag地址</span><br><span class="line">#   调用mvn执行编译与测试</span><br><span class="line">#   提交修改的pom</span><br><span class="line">#   打tag(tag名称可指定)</span><br><span class="line">#   修改下一个开发版本号(可手动指定)</span><br><span class="line">#   最终提交</span><br><span class="line">mvn release:prepare</span><br><span class="line">#  non-interactive</span><br><span class="line">mvn release:prepare -B</span><br><span class="line">mvn release:prepare --batch-mode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>release:prepare-with-pom</code> Prepare for a release in SCM, and generate release POMs that record the fully resolved projects used.</p>
+</li>
+<li><p><code>release:rollback</code> Rollback a previous release.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># mvn release:prepare后可以通过rollback回滚. </span><br><span class="line"># 注意事项:</span><br><span class="line">#   在未执行release:clean前(需要确保prepare生成的备份文件存在)</span><br><span class="line">#</span><br><span class="line"># rollabck所做的操作:</span><br><span class="line">#  根据mvn release:prepare生成的备份文件回滚到prepare前</span><br><span class="line">#  删除生成的branch/tag(该功能未实现)</span><br><span class="line">mvn release:rollabck</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>release:perform</code> Perform a release from SCM.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># perform所做的操作:</span><br><span class="line">#   从tag中检出代码</span><br><span class="line">#   执行预先定义的goals(default deploy site-deploy)</span><br><span class="line">mvn release:perform</span><br><span class="line">mvn org.apache.maven.plugins:maven-release-plugin:2.5.3:perform -DconnectionUrl=scm:svn:https://svn.mycompany.com/repos/path/to/myproject/tags/myproject-1.2.3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>release:stage</code> Perform a release from SCM into a staging folder/repository.</p>
+</li>
+<li><p><code>release:branch</code> Create a branch of the current project with all versions updated.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># updateBranchVersions:是否自动升级版本号</span><br><span class="line"># updateWorkingCopyVersions:更新当前工作拷贝</span><br><span class="line"># updateVersionsToSnapshot:</span><br><span class="line">mvn release:branch -DbranchName=my-branch -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>release:update-versions</code> Update the versions in the POM(s).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn release:update-versions</span><br><span class="line">mvn release:update-versions -DautoVersionSubmodules=true</span><br><span class="line">mvn release:update-versions --batch-mode -DdevelopmentVersion=1.2.0-SNAPSHOT</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="release-prepare操作对应的配置"><a href="#release-prepare操作对应的配置" class="headerlink" title="release:prepare操作对应的配置"></a>release:prepare操作对应的配置</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">涉及的操作</th>
+<th style="text-align:left">相关配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">检查是否有未提交的文件</td>
+<td style="text-align:left">checkModificationExcludes</td>
+</tr>
+<tr>
+<td style="text-align:left">检查是否有SNAPSHOT的依赖</td>
+<td style="text-align:left">allowTimestampedSnapshots, updateDependencies</td>
+</tr>
+<tr>
+<td style="text-align:left">修改版本号 x.y.x-SNAHSHOT -&gt; x.y.z</td>
+<td style="text-align:left">releaseVersion, autoVersionSubmodules</td>
+</tr>
+<tr>
+<td style="text-align:left">修改pom scm信息最终发布的tag地址</td>
+<td style="text-align:left">tagBase</td>
+</tr>
+<tr>
+<td style="text-align:left">调用mvn执行编译与测试</td>
+<td style="text-align:left">arguments, preparationGoals</td>
+</tr>
+<tr>
+<td style="text-align:left">提交修改的pom</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">打tag(tag名称可指定)</td>
+<td style="text-align:left">tagNameFormat</td>
+</tr>
+<tr>
+<td style="text-align:left">修改下一个开发版本号(可手动指定)</td>
+<td style="text-align:left">developmentVersion</td>
+</tr>
+<tr>
+<td style="text-align:left">最终提交</td>
+<td style="text-align:left">-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mavn-deploy-plugin"><a href="#mavn-deploy-plugin" class="headerlink" title="mavn-deploy-plugin"></a>mavn-deploy-plugin</h2><h3 id="deploy配置项"><a href="#deploy配置项" class="headerlink" title="deploy配置项"></a>deploy配置项</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">   | In this case, you can specify a server definition in your settings.xml to </span></span><br><span class="line"><span class="comment">   | provide authentication information for both of these repositories at once.</span></span><br><span class="line"><span class="comment">   | Your server section might look like this:</span></span><br><span class="line"><span class="comment">   |    &lt;settings&gt;</span></span><br><span class="line"><span class="comment">   |      ...</span></span><br><span class="line"><span class="comment">   |      &lt;servers&gt;</span></span><br><span class="line"><span class="comment">   |        &lt;id&gt;repo.id&lt;/id&gt;</span></span><br><span class="line"><span class="comment">   |        &lt;username&gt;username&lt;/username&gt;</span></span><br><span class="line"><span class="comment">   |        &lt;password&gt;password&lt;/password&gt;</span></span><br><span class="line"><span class="comment">   |      &lt;/servers&gt;</span></span><br><span class="line"><span class="comment">   |      .... </span></span><br><span class="line"><span class="comment">   |    &lt;/settings&gt;</span></span><br><span class="line"><span class="comment">   |--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>repo.id<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://host/repo/releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>repo.id<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://host/repo/snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-deploy-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 设置true将不deploy当前工程 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">skip</span>&gt;</span>false<span class="tag">&lt;/<span class="name">skip</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 指定deploy到其他库, 格式: id::layout::url --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">altDeploymentRepository</span>&gt;</span>repo1.id:default:http://host/repo1/<span class="tag">&lt;/<span class="name">altDeploymentRepository</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">           | A comma separated list of types for each of the extra side</span></span><br><span class="line"><span class="comment">           | artifacts to deploy. If there is a mis-match in the number of</span></span><br><span class="line"><span class="comment">           | entries in files or classifiers, then an error will</span></span><br><span class="line"><span class="comment">           | be raised.</span></span><br><span class="line"><span class="comment">           |--&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">types</span>&gt;</span>client<span class="tag">&lt;/<span class="name">types</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- Whether to deploy snapshots with a unique version or not. --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">uniqueVersion</span>&gt;</span>false<span class="tag">&lt;/<span class="name">uniqueVersion</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="deploy命令"><a href="#deploy命令" class="headerlink" title="deploy命令"></a>deploy命令</h3><ul>
+<li><code>deploy:deploy</code> is used to automatically install the artifact, its pom and the attached artifacts produced by a particular project. Most if not all of the information related to the deployment is stored in the project’s pom.</li>
+<li><code>deploy:deploy-file</code> is used to install a single artifact along with its pom. In that case the artifact information can be taken from an optionally specified pomFile, but can be completed/overriden using the command line.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mvn deploy:deploy-file -Durl=path/to</span><br><span class="line">                       -DrepositoryId=some.id \</span><br><span class="line">                       -Dfile=your-artifact-1.0.jar \</span><br><span class="line">                       [-DpomFile=your-pom.xml] \</span><br><span class="line">                       [-DgroupId=org.some.group] \</span><br><span class="line">                       [-DartifactId=your-artifact] \</span><br><span class="line">                       [-Dversion=1.0] \</span><br><span class="line">                       [-Dpackaging=jar] \</span><br><span class="line">                       [-Dclassifier=test] \</span><br><span class="line">                       [-DgeneratePom=true] \</span><br><span class="line">                       [-DgeneratePom.description=&quot;My Project Description&quot;] \</span><br><span class="line">                       [-DrepositoryLayout=legacy] \</span><br><span class="line">                       [-DuniqueVersion=false]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="maven-site-plugin"><a href="#maven-site-plugin" class="headerlink" title="maven-site-plugin"></a>maven-site-plugin</h2><h3 id="site配置项"><a href="#site配置项" class="headerlink" title="site配置项"></a>site配置项</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">site</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>www.yourcompany.com<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>scp://www.yourcompany.com/www/docs/project/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">site</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-site-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="site-description"><a href="#site-description" class="headerlink" title="site description"></a>site description</h3><p><code>site.xml</code> in <code>src/site</code>. 可配置的项目有</p>
+<ul>
+<li>Title</li>
+<li>Banner</li>
+<li>Publish Date</li>
+<li>Version</li>
+<li>“Powered by” Logo</li>
+<li>Inheritance</li>
+<li>Including Generated Content</li>
+<li>Inject xhtml into &lt;head&gt;</li>
+<li>Links</li>
+<li>Breadcrumbs</li>
+<li>Custom footer</li>
+<li>Custom content</li>
+<li>Skinning</li>
+<li>Custom Properties</li>
+<li>Expressions</li>
+</ul>
+<blockquote>
+<p>schema: <a href="http://maven.apache.org/xsd/decoration-1.7.0.xsd" target="_blank" rel="noopener">http://maven.apache.org/xsd/decoration-1.7.0.xsd</a></p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- project[@name] 设置title --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/DECORATION/1.1.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"</span> <span class="attr">name</span>=<span class="string">"title"</span> &gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 左banner --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bannerLeft</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>Project Name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">src</span>&gt;</span>http://maven.apache.org/images/apache-maven-project-2.png<span class="tag">&lt;/<span class="name">src</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">href</span>&gt;</span>http://maven.apache.org/<span class="tag">&lt;/<span class="name">href</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bannerLeft</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 右banner --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bannerRight</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">bannerRight</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">   |  position: left(default), right, navigation-top, navigation-bottom, bottom.</span></span><br><span class="line"><span class="comment">   |--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">publishDate</span> <span class="attr">position</span>=<span class="string">"right"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span> <span class="attr">position</span>=<span class="string">"right"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">poweredBy</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logo</span> <span class="attr">name</span>=<span class="string">"Maven"</span> <span class="attr">href</span>=<span class="string">"http://maven.apache.org/"</span> <span class="attr">img</span>=<span class="string">"http://maven.apache.org/images/logos/maven-feather.png"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">poweredBy</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- content: menu --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 注入html代码 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">      &lt;![CDATA[&lt;script src="http://www.google-analytics.com/urchin.js" type="text/javascript" /&gt;]]&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">     |  To add links below your site logo, just add a links </span></span><br><span class="line"><span class="comment">     |  element to the &lt;body&gt; element of the site descriptor. </span></span><br><span class="line"><span class="comment">     |  Each item in the links element will be rendered as </span></span><br><span class="line"><span class="comment">     |  a link in a bar directly below your project's logo.</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">links</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"Apache"</span> <span class="attr">href</span>=<span class="string">"http://www.apache.org"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"Maven"</span> <span class="attr">href</span>=<span class="string">"http://maven.apache.org"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">links</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">menu</span> <span class="attr">name</span>=<span class="string">"Overviews"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"Project Info"</span> <span class="attr">href</span>=<span class="string">"index.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">       |  在对应的文件目录结构中可以指向对应的文件名</span></span><br><span class="line"><span class="comment">       |  src</span></span><br><span class="line"><span class="comment">       |   |-site</span></span><br><span class="line"><span class="comment">       |      |-apt</span></span><br><span class="line"><span class="comment">       |         |-foo.apt</span></span><br><span class="line"><span class="comment">       |      |-fml</span></span><br><span class="line"><span class="comment">       |         |-faq.html</span></span><br><span class="line"><span class="comment">       |--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>"<span class="attr">Foo</span>" <span class="attr">href</span>=<span class="string">"foo.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>"<span class="attr">FAQ</span>" <span class="attr">href</span>=<span class="string">"faq.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">menu</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     |  syntax: </span></span><br><span class="line"><span class="comment">     |    reports: 工程生成的报告信息menu列表</span></span><br><span class="line"><span class="comment">     |     parent: parent site</span></span><br><span class="line"><span class="comment">     |    modules: 子模块的菜单</span></span><br><span class="line"><span class="comment">     |--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">menu</span> <span class="attr">ref</span>=<span class="string">"modules"</span>&gt;</span><span class="tag">&lt;/<span class="name">menu</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">     |  inherit: top, bottom</span></span><br><span class="line"><span class="comment">     |--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">menu</span> <span class="attr">name</span>=<span class="string">"Inherit Menu"</span> <span class="attr">inherit</span>=<span class="string">"top"</span>&gt;</span><span class="tag">&lt;/<span class="name">menu</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span>&lt;![CDATA[All rights reserved.]]&gt;<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">skin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.skins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-fluido-skin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">skin</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h3><p>The site.xml can contain some expressions, like ${project.name}. Each expression will be evaluated when the site is rendered.<br>Expressions can be:</p>
+<ul>
+<li><code>${project.*}</code>, for instance <code>${project.organization.name}</code> referenced in <code>&lt;project&gt;&lt;organization&gt;&lt;name&gt;</code></li>
+<li><code>${project.properties}</code>, for instance <code>${myProperty}</code> referenced in <code>&lt;project&gt;&lt;properties&gt;&lt;myProperty&gt;</code></li>
+<li><code>${environmentVariable}</code>, for instance <code>${JAVA_HOME}</code></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/15/EJB容器对@EJB注解的支持比较/" rel="next" title="EJB容器对@EJB注解的支持比较">
+                <i class="fa fa-chevron-left"></i> EJB容器对@EJB注解的支持比较
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/18/2017年度总结/" rel="prev" title="2017年度总结">
+                2017年度总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/29/Maven-Plugins/" data-title="Maven Plugins" data-url="http://github.com/wuxii/2017/03/29/Maven-Plugins/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="wuxin">
+          <p class="site-author-name" itemprop="name">wuxin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wuxii" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1956186645" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven-scm-plugin"><span class="nav-number">1.</span> <span class="nav-text">maven-scm-plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scm配置项"><span class="nav-number">1.1.</span> <span class="nav-text">scm配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scm命令"><span class="nav-number">1.2.</span> <span class="nav-text">scm命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven-release-plugin"><span class="nav-number">2.</span> <span class="nav-text">maven-release-plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#release配置项"><span class="nav-number">2.1.</span> <span class="nav-text">release配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#release命令"><span class="nav-number">2.2.</span> <span class="nav-text">release命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#release-prepare操作对应的配置"><span class="nav-number">2.3.</span> <span class="nav-text">release:prepare操作对应的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mavn-deploy-plugin"><span class="nav-number">3.</span> <span class="nav-text">mavn-deploy-plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy配置项"><span class="nav-number">3.1.</span> <span class="nav-text">deploy配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy命令"><span class="nav-number">3.2.</span> <span class="nav-text">deploy命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven-site-plugin"><span class="nav-number">4.</span> <span class="nav-text">maven-site-plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#site配置项"><span class="nav-number">4.1.</span> <span class="nav-text">site配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#site-description"><span class="nav-number">4.2.</span> <span class="nav-text">site description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expressions"><span class="nav-number">4.3.</span> <span class="nav-text">Expressions</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright ">
+  
+  Copyright &copy; 
+  <span itemprop="copyrightYear">2019 wuxin</span>
+
+  
+  <div class="powered-by"></div>
+  <span>Powered by <a href="https://hexo.io">Hexo</a></span>
+  <div class="powered-by"></div>
+  <div class="theme-info">
+    主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+  </div>
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wuxii"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

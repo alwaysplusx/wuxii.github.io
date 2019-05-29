@@ -1,0 +1,1073 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="JavaEE在1.4版本前称为J2EE, 1.5的发布(也就是JavaEE 5)正式更名为JavaEE. JavaEE版本演化   版本 发布时间     JPE 1998.05   J2EE 1.2 1999.12.12   J2EE 1.3 2001.09.24   J2EE 1.4 2003.11.11   JavaEE 5 2006.05.11   JavaEE 6 2009.12.10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaEE版本历史">
+<meta property="og:url" content="http://github.com/wuxii/2016/12/28/JavaEE版本历史/index.html">
+<meta property="og:site_name" content="wuxii">
+<meta property="og:description" content="JavaEE在1.4版本前称为J2EE, 1.5的发布(也就是JavaEE 5)正式更名为JavaEE. JavaEE版本演化   版本 发布时间     JPE 1998.05   J2EE 1.2 1999.12.12   J2EE 1.3 2001.09.24   J2EE 1.4 2003.11.11   JavaEE 5 2006.05.11   JavaEE 6 2009.12.10">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-01-07T02:26:46.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaEE版本历史">
+<meta name="twitter:description" content="JavaEE在1.4版本前称为J2EE, 1.5的发布(也就是JavaEE 5)正式更名为JavaEE. JavaEE版本演化   版本 发布时间     JPE 1998.05   J2EE 1.2 1999.12.12   J2EE 1.3 2001.09.24   J2EE 1.4 2003.11.11   JavaEE 5 2006.05.11   JavaEE 6 2009.12.10">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/wuxii/2016/12/28/JavaEE版本历史/">
+
+
+
+
+
+  <title> JavaEE版本历史 | wuxii </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wuxii</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://github.com/wuxii/2016/12/28/JavaEE版本历史/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="wuxin">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wuxii">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wuxii" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaEE版本历史
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-28T16:41:32+08:00">
+                2016-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/28/JavaEE版本历史/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/JavaEE版本历史/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JavaEE在1.4版本前称为J2EE, 1.5的发布(也就是JavaEE 5)正式更名为JavaEE.</p>
+<h2 id="JavaEE版本演化"><a href="#JavaEE版本演化" class="headerlink" title="JavaEE版本演化"></a>JavaEE版本演化</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">版本</th>
+<th style="text-align:left">发布时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">JPE</td>
+<td style="text-align:left">1998.05</td>
+</tr>
+<tr>
+<td style="text-align:left">J2EE 1.2</td>
+<td style="text-align:left">1999.12.12</td>
+</tr>
+<tr>
+<td style="text-align:left">J2EE 1.3</td>
+<td style="text-align:left">2001.09.24</td>
+</tr>
+<tr>
+<td style="text-align:left">J2EE 1.4</td>
+<td style="text-align:left">2003.11.11</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaEE 5</td>
+<td style="text-align:left">2006.05.11</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaEE 6</td>
+<td style="text-align:left">2009.12.10</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaEE 7</td>
+<td style="text-align:left">2013.06.12</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaEE 8</td>
+<td style="text-align:left">未发布</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h2 id="J2EE-1-2-1-4"><a href="#J2EE-1-2-1-4" class="headerlink" title="J2EE 1.2~1.4"></a>J2EE 1.2~1.4</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">J2EE 1.2</th>
+<th style="text-align:center">J2EE 1.3</th>
+<th style="text-align:center">J2EE1.4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">JDBC Standard Extension API</td>
+<td style="text-align:center">2.0</td>
+<td style="text-align:center">2.0</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Naming and Directory Interface Specification (JNDI)</td>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Servlet</td>
+<td style="text-align:center">2.2</td>
+<td style="text-align:center">2.3</td>
+<td style="text-align:center">2.4</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Pages (JSP)</td>
+<td style="text-align:center">1.1</td>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Enterprise JavaBeans (EJB)</td>
+<td style="text-align:center">1.1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Message Service API (JMS)</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Transaction API (JTA)</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Java API for XML Processing (JAXP)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.1</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Pages Standard Tag Library (JSTL)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Authentication and Authorization Service (JAAS)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Web Services for J2EE 1.1</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Java API for XML Processing (JAXP)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.2</td>
+</tr>
+<tr>
+<td style="text-align:left">Java API for XML-based RPC (JAX-RPC)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java API for XML Registries (JAXR)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Faces (JSF)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Management Extensions (JMX)</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">1.2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JavaEE-5"><a href="#JavaEE-5" class="headerlink" title="JavaEE 5"></a>JavaEE 5</h2><p>J2EE的糟糕开发体验使得Spring/Struts/Hibernate得以大行其道.为了解决笨重的J2EE问题,在2006年推出了JavaEE 5, 其中EJB 3.0有了长足的进步,JPA的出现也使得实体存储的标准得到统一.</p>
+<p><strong>Web Services Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* Web Services</td>
+<td style="text-align:center">1.2</td>
+</tr>
+<tr>
+<td style="text-align:left">* Java API for XML-Based Web Services (JAX-WS)</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Architecture for XML Binding (JAXB)</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Java API for XML-Based RPC (JAX-RPC)</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java API for XML Registries (JAXR)</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">SOAP with Attachments API for Java (SAAJ)</td>
+<td style="text-align:center">1.3</td>
+</tr>
+<tr>
+<td style="text-align:left">Streaming API for XML (StAX)</td>
+<td style="text-align:center">1.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Web Application Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Java Servlet</td>
+<td style="text-align:center">2.5</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Faces (JSF)</td>
+<td style="text-align:center">1.2</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Pages (JSP)</td>
+<td style="text-align:center">2.1</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Pages Standard Tag Library (JSTL)</td>
+<td style="text-align:center">1.2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Enterprise Application Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* Enterprise JavaBeans (EJB)</td>
+<td style="text-align:center">3.0</td>
+</tr>
+<tr>
+<td style="text-align:left">* Java Persistence API (JPA)</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">* Common Annotations for the Java Platform</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Message Service API (JMS)</td>
+<td style="text-align:center">1.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Transaction API (JTA)</td>
+<td style="text-align:center">1.1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JavaEE-6"><a href="#JavaEE-6" class="headerlink" title="JavaEE 6"></a>JavaEE 6</h2><p>由JavaEE 6开始JavaEE规范开始整和来自Spring的概念与特性. JavaEE 6的轻量级优化与删减了大部分未使用的API, 使得JavaEE规范得到了较大范围的流行.</p>
+<blockquote>
+<p>Spring IoC   -&gt; Dependency Injection for Java<br>Spring AOP   -&gt; Interceptors<br>Spring Beans -&gt; Session Bean</p>
+</blockquote>
+<p><strong>Web Application Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* Java Servlet</td>
+<td style="text-align:center">3.0</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Faces (JSF)</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:left">JavaServer Pages (JSP)</td>
+<td style="text-align:center">2.2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Enterprise Application Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Enterprise JavaBeans (EJB)</td>
+<td style="text-align:center">3.1</td>
+</tr>
+<tr>
+<td style="text-align:left">* Java Persistence API (JPA)</td>
+<td style="text-align:center">2.0</td>
+</tr>
+<tr>
+<td style="text-align:left">* Contexts and Dependency Injection for Java</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">* Dependency Injection for Java</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">* Bean Validation</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Managed Beans</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">* Interceptors</td>
+<td style="text-align:center">1.1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JavaEE-7"><a href="#JavaEE-7" class="headerlink" title="JavaEE 7"></a>JavaEE 7</h2><p>跟随时代的变化JavaEE 7开始拥抱HTML5/WebSocket/RESTful. 为大数据时代准备了平台级的并发与批处理规范.</p>
+<p><strong>Web Application Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* Java API for WebSocket</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">* Java API for JSON Processing</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Servlet</td>
+<td style="text-align:center">3.1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Enterprise Application Technologies:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:center">版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* Batch Applications for the Java Platform</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:left">* Concurrency Utilities for Java EE</td>
+<td style="text-align:center">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Enterprise JavaBeans (EJB)</td>
+<td style="text-align:center">3.2</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Persistence API (JPA)</td>
+<td style="text-align:center">2.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Java Message Service API (JMS)</td>
+<td style="text-align:center">2.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JavaEE-8"><a href="#JavaEE-8" class="headerlink" title="JavaEE 8"></a>JavaEE 8</h2><ul>
+<li>HTML5</li>
+<li>HTTP2.0</li>
+<li>JSON-B</li>
+<li>JSON-P</li>
+</ul>
+<p>参考资料:<br>[1][<a href="https://en.wikipedia.org/wiki/Java_EE_version_history" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Java_EE_version_history</a>]</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/27/Spring-MVC/" rel="next" title="Spring MVC">
+                <i class="fa fa-chevron-left"></i> Spring MVC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/Maven基础介绍/" rel="prev" title="Maven基础介绍">
+                Maven基础介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/28/JavaEE版本历史/" data-title="JavaEE版本历史" data-url="http://github.com/wuxii/2016/12/28/JavaEE版本历史/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="wuxin">
+          <p class="site-author-name" itemprop="name">wuxin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wuxii" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1956186645" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaEE版本演化"><span class="nav-number">1.</span> <span class="nav-text">JavaEE版本演化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J2EE-1-2-1-4"><span class="nav-number">2.</span> <span class="nav-text">J2EE 1.2~1.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaEE-5"><span class="nav-number">3.</span> <span class="nav-text">JavaEE 5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaEE-6"><span class="nav-number">4.</span> <span class="nav-text">JavaEE 6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaEE-7"><span class="nav-number">5.</span> <span class="nav-text">JavaEE 7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaEE-8"><span class="nav-number">6.</span> <span class="nav-text">JavaEE 8</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright ">
+  
+  Copyright &copy; 
+  <span itemprop="copyrightYear">2019 wuxin</span>
+
+  
+  <div class="powered-by"></div>
+  <span>Powered by <a href="https://hexo.io">Hexo</a></span>
+  <div class="powered-by"></div>
+  <div class="theme-info">
+    主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+  </div>
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wuxii"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

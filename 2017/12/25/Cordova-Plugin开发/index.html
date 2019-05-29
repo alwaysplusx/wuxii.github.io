@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="开发环境准备 Android Studio Nodejs + Cordova  下载并安装安卓开发环境, 完成Cordova的基础环境配置https://developer.android.com/studio/index.htmlhttps://nodejs.org/en/http://cordova.apache.org/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cordova Plugin开发(Android)">
+<meta property="og:url" content="http://github.com/wuxii/2017/12/25/Cordova-Plugin开发/index.html">
+<meta property="og:site_name" content="wuxii">
+<meta property="og:description" content="开发环境准备 Android Studio Nodejs + Cordova  下载并安装安卓开发环境, 完成Cordova的基础环境配置https://developer.android.com/studio/index.htmlhttps://nodejs.org/en/http://cordova.apache.org/">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://github.com/images/20171226160905.png">
+<meta property="og:updated_time" content="2017-12-26T08:27:51.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cordova Plugin开发(Android)">
+<meta name="twitter:description" content="开发环境准备 Android Studio Nodejs + Cordova  下载并安装安卓开发环境, 完成Cordova的基础环境配置https://developer.android.com/studio/index.htmlhttps://nodejs.org/en/http://cordova.apache.org/">
+<meta name="twitter:image" content="http://github.com/images/20171226160905.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/wuxii/2017/12/25/Cordova-Plugin开发/">
+
+
+
+
+
+  <title> Cordova Plugin开发(Android) | wuxii </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">wuxii</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://github.com/wuxii/2017/12/25/Cordova-Plugin开发/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="wuxin">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="wuxii">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="wuxii" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Cordova Plugin开发(Android)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T14:16:15+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/25/Cordova-Plugin开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/25/Cordova-Plugin开发/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="开发环境准备"><a href="#开发环境准备" class="headerlink" title="开发环境准备"></a>开发环境准备</h2><ol>
+<li>Android Studio</li>
+<li>Nodejs + Cordova</li>
+</ol>
+<p>下载并安装安卓开发环境, 完成Cordova的基础环境配置<br><a href="https://developer.android.com/studio/index.html" target="_blank" rel="noopener">https://developer.android.com/studio/index.html</a><br><a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a><br><a href="http://cordova.apache.org/" target="_blank" rel="noopener">http://cordova.apache.org/</a><br><a id="more"></a></p>
+<h3 id="Cordova环境安装"><a href="#Cordova环境安装" class="headerlink" title="Cordova环境安装"></a>Cordova环境安装</h3><ol>
+<li>安装<code>Nodejs</code></li>
+<li>全局安装<code>cordova</code> <code>npm install -g cordova</code></li>
+<li>尝试创建第一个Cordova应用 <code>cordova create MyFirstApp</code></li>
+</ol>
+<p><a href="http://cordova.apache.org/docs/en/latest/guide/cli/index.html" target="_blank" rel="noopener">http://cordova.apache.org/docs/en/latest/guide/cli/index.html</a></p>
+<blockquote>
+<p>注意: 如果使用cnpm安装可能导致cordova虽安装成功但不可用.<br>建议将npm的registry修改为淘宝镜像而不是使用cnpm来安装<br><code>npm config set registry https://registry.npm.taobao.org</code></p>
+</blockquote>
+<h2 id="插件环境"><a href="#插件环境" class="headerlink" title="插件环境"></a>插件环境</h2><h3 id="安装plugman"><a href="#安装plugman" class="headerlink" title="安装plugman"></a>安装plugman</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g plugman</span><br></pre></td></tr></table></figure>
+<p>plugman是cordova提供的插件管理命令行工具, 不仅能用来创建插件的目录与文件还能提供丰富的插件管理功能.<br><a href="http://cordova.apache.org/docs/en/latest/plugin_ref/plugman.html" target="_blank" rel="noopener">http://cordova.apache.org/docs/en/latest/plugin_ref/plugman.html</a></p>
+<h3 id="创建插件工程"><a href="#创建插件工程" class="headerlink" title="创建插件工程"></a>创建插件工程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> plugman create --name &lt;pluginName&gt; --plugin_id &lt;pluginID&gt; --plugin_version &lt;version&gt; [--path &lt;directory&gt;] [--variable NAME=VALUE]</span><br><span class="line">plugman create --name Test --plugin_id cordova-plugin-test --plugin_version 1.0.0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 创建完成后生成如下目录结构</span><br><span class="line"><span class="meta">#</span> Test</span><br><span class="line"><span class="meta">#</span>   |-src</span><br><span class="line"><span class="meta">#</span>   |-www</span><br><span class="line"><span class="meta">#</span>   |  |-Test.js</span><br><span class="line"><span class="meta">#</span>   |-plugin.xml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 切换至插件目录</span><br><span class="line">cd Test</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加需要开发的平台</span><br><span class="line">plugman platform add --platform_name android</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> cordova-plugin-test</span><br><span class="line"><span class="meta">#</span>   |-src</span><br><span class="line"><span class="meta">#</span>   |  |-android</span><br><span class="line"><span class="meta">#</span>   |    |-Test.java</span><br><span class="line"><span class="meta">#</span>   |-www</span><br><span class="line"><span class="meta">#</span>   |  |-Test.js</span><br><span class="line"><span class="meta">#</span>   |-plugin.xml</span><br></pre></td></tr></table></figure>
+<h4 id="cordova-plugin-xml"><a href="#cordova-plugin-xml" class="headerlink" title="cordova plugin.xml"></a>cordova plugin.xml</h4><p>plugin.xml可以配置一下信息(包括不限于):</p>
+<ul>
+<li>开发者信息</li>
+<li>插件所支持的平台</li>
+<li>平台的源文件映射</li>
+<li>平台的依赖框架/lib映射</li>
+<li>users-permission</li>
+</ul>
+<blockquote>
+<p>创建成功后注意修改对应的映射关系, 将java的包名修改为可用的包名</p>
+</blockquote>
+<p><a href="http://cordova.apache.org/docs/en/latest/plugin_ref/spec.html" target="_blank" rel="noopener">http://cordova.apache.org/docs/en/latest/plugin_ref/spec.html</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">id</span>=<span class="string">"cordova-plugin-test"</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns</span>=<span class="string">"http://apache.org/cordova/ns/plugins/1.0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">version</span>=<span class="string">"1.0.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">name</span>=<span class="string">"Test"</span> <span class="attr">src</span>=<span class="string">"www/Test.js"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">"cordova.plugins.Test"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">parent</span>=<span class="string">"/*"</span> <span class="attr">target</span>=<span class="string">"res/xml/config.xml"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">"Test"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"android-package"</span> <span class="attr">value</span>=<span class="string">"cordova-plugin-test.Test"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">parent</span>=<span class="string">"/*"</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 依赖的第三方lib包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">lib-file</span> <span class="attr">src</span>=<span class="string">"src/android/libs/xxx.jar"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 源文件映射关系, 需要将包名修改为可用的包名 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        &lt;source-file src="src/android/Test.java" target-dir="src/cordova-plugin-test/Test" /&gt;</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/Test.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/com/company/Test"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>基础的插件框架结构完成后就可以生成对应的插件package.json了.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugman createpackagejson &lt;dir&gt;</span><br><span class="line"><span class="meta">#</span> 如果命令无效可使用npm来构建包信息</span><br><span class="line"><span class="meta">#</span> npm init </span><br><span class="line"><span class="meta">#</span> 根据提示输入package.json的具体信息</span><br></pre></td></tr></table></figure>
+<p>一个可被引入项目的插件壳就完成了.</p>
+<h3 id="插件功能开发"><a href="#插件功能开发" class="headerlink" title="插件功能开发"></a>插件功能开发</h3><p>将做好的插件壳通过插件的方式引入到具体的项目中进行开发是一种较为可行的方法.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 创建cordova项目</span><br><span class="line"><span class="meta">#</span> cordova create MyFirstApp</span><br><span class="line"><span class="meta">#</span> cd MyFirstApp</span><br><span class="line"><span class="meta">#</span> cordova platform add android</span><br><span class="line"><span class="meta">#</span> 添加本地插件</span><br><span class="line"><span class="meta">#</span> cordova plugin add path/to/local/plugin</span><br><span class="line">cordova plugin add ./../Test</span><br></pre></td></tr></table></figure>
+<p>插件引入后即可进入具体的插件功能开发, 由于各个平台的插件与平台库有较强的依赖性, 所以需要生成对应的项目才能对插件功能进行开发. 将以Android为例, 进行插件功能的开发.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 构建对应平台的工程</span><br><span class="line">cordova build android</span><br><span class="line"><span class="meta">#</span> 构建完成后既可以将MyFirstApp\platforms\android导入到Android Studio中进行开发调试</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20171226160905.png" alt="导入后的项目结构"></p>
+<p>对应的插件代码也将一同导入到项目中, 可以在项目中对插件代码自由编辑, 这样就能开发插件功能了.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/18/2017年度总结/" rel="next" title="2017年度总结">
+                <i class="fa fa-chevron-left"></i> 2017年度总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/27/EJB容器中的EntityManager线程安全性探究/" rel="prev" title="EJB容器中的EntityManager线程安全性探究">
+                EJB容器中的EntityManager线程安全性探究 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/12/25/Cordova-Plugin开发/" data-title="Cordova Plugin开发(Android)" data-url="http://github.com/wuxii/2017/12/25/Cordova-Plugin开发/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="wuxin">
+          <p class="site-author-name" itemprop="name">wuxin</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wuxii" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1956186645" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境准备"><span class="nav-number">1.</span> <span class="nav-text">开发环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cordova环境安装"><span class="nav-number">1.1.</span> <span class="nav-text">Cordova环境安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件环境"><span class="nav-number">2.</span> <span class="nav-text">插件环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装plugman"><span class="nav-number">2.1.</span> <span class="nav-text">安装plugman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建插件工程"><span class="nav-number">2.2.</span> <span class="nav-text">创建插件工程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cordova-plugin-xml"><span class="nav-number">2.2.1.</span> <span class="nav-text">cordova plugin.xml</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件功能开发"><span class="nav-number">2.3.</span> <span class="nav-text">插件功能开发</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright ">
+  
+  Copyright &copy; 
+  <span itemprop="copyrightYear">2019 wuxin</span>
+
+  
+  <div class="powered-by"></div>
+  <span>Powered by <a href="https://hexo.io">Hexo</a></span>
+  <div class="powered-by"></div>
+  <div class="theme-info">
+    主题 - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+  </div>
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wuxii"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
